@@ -20,11 +20,11 @@ namespace TextBinding
     /// </summary>
     public partial class MainWindow : Window
     {
-        Person p = new Person("Jan", "Dobeš", new DateTime(1999, 15, 11));
+        Person p = new Person("Jan", "Dobeš", new DateTime(1999, 11, 11));
         public MainWindow()
         {
             InitializeComponent();
-           
+            DataContext = p;
         }
 
         private void OK_Click(object sender, RoutedEventArgs e)
