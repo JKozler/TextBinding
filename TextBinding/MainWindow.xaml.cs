@@ -20,17 +20,19 @@ namespace TextBinding
     /// </summary>
     public partial class MainWindow : Window
     {
-        Person p = new Person("Jan", "Dobeš", new DateTime(1999, 11, 11));
+        Person d = new Person("Jan", "Dobeš", new DateTime(2001,1,1));
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = p;
+            DataContext = d;
         }
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            BindingExpression expression = jmeno.GetBindingExpression(TextBox.TextProperty);
+            Person p = new Person(jmeno.Text, prijmeni.Text, narozeni.DisplayDate);
+            BindingExpression expression = Shrnuti.GetBindingExpression(TextBox.TextProperty);
             expression?.UpdateSource();
+            DataContext = p;
         }
     }
     class Person
@@ -38,11 +40,13 @@ namespace TextBinding
         public string Jmeno { get; set; }
         public string Prijmeni { get; set; }
         public DateTime Narozeni { get; set; }
+        public string Vse { get; set; }
         public Person(string Jmeno, string Prijmeni, DateTime Narozeni)
         {
             this.Jmeno = Jmeno;
             this.Prijmeni = Prijmeni;
             this.Narozeni = Narozeni;
+            this.Vse = Jmeno + " " + Prijmeni + " " + Convert.ToString(Narozeni.Day) + "." + Convert.ToString(Narozeni.Month) + ". " + Convert.ToString(Narozeni.Year);
         }
     }
 }
